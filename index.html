@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrousel infinito con Modal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <!--Aqui van las imagenes que ustedes quieran-->
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 1" data-title="Titulo 01" data-descripcion="Breve descripcion 01" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 2" data-title="Titulo 02" data-descripcion="Breve descripcion 02" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 3" data-title="Titulo 03" data-descripcion="Breve descripcion 03" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 4" data-title="Titulo 04" data-descripcion="Breve descripcion 04" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 1" data-title="Titulo 01" data-descripcion="Breve descripcion 01" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 2" data-title="Titulo 02" data-descripcion="Breve descripcion 02" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 3" data-title="Titulo 03" data-descripcion="Breve descripcion 03" 
+                    data-link="https://example.com"></div>
+                <div class="carousel-slide"><img src="IMG/marco.jpg" alt="imagen 4" data-title="Titulo 04" data-descripcion="Breve descripcion 04" 
+                    data-link="https://example.com"></div>
+                <!--Si deseas puedes duplicar los divs para añadir mas imagenes-->
+            </div>
+        </div>
+    </div>
+
+    <!--AQUI VA A IR EL MODAL DE LAS IMAGENES-->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-image" src="" alt="Modal Image">
+            <h2 id="modal-title">Title</h2>
+            <p id="modal-descripcion">Descripción</p>
+            <a id="modal-link" href="#" target="_blank">Más información</a>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.carousel-slide');
+        const modal = document.getElementById('modal');
+        const modalImagen = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescripcion = document.getElementById('modal-descripcion');
+        const modalLink = document.getElementById('modal-link');
+        const closeModal = document.querySelector('.close');
+        //AQUI HACEMOS EL MODAL PARA QUE ABRA AL HACERLE CLICK A UNA IMAGEN
+        slides.forEach(slide => {
+            slide.addEventListener('click', function(){
+                modalImagen.src = this.querySelector('img').src;
+                modalTitle.textContent = this.querySelector('img').getAttribute('data-title');
+                modalDescripcion.textContent = this.querySelector('img').getAttribute('data-descripcion');
+                modalLink.href = this.querySelector('img').getAttribute('data-link');
+                modal.style.display = 'block';
+            });
+        });
+        //AHORA PARA CERRAR EL MODAL
+        closeModal.addEventListener('click',function(){
+            modal.style.display = 'none';
+        });
+        //Cerrar el modal al hacer click fuera del contenido
+        window.addEventListener('click',function(event){
+            if (event.target === modal){
+                modal.style.display ='none';
+            }
+        });
+    </script>
+</body>
+</html>
